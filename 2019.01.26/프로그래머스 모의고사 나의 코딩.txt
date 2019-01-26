@@ -1,0 +1,58 @@
+def solution(l, v):
+    v.sort()
+    tmp=[]
+    possible=[]
+    tmp.append(v[0]-0)
+    tmp.append(l-v[len(v)-1])
+    #print(tmp)
+    for i in range(len(v)-1):
+        possible.append(v[i+1] - v[i])
+    possible=(max(possible))
+    #print(possible)
+    if possible/2==possible//2:
+        possible = possible//2
+    else:
+        possible = possible//2+1
+    tmp.append(possible)
+    return max(tmp)
+
+
+
+
+
+
+
+
+def solution(board, nums):
+    tmp=len(board[0])
+    order=0
+    under=0
+    wuder=0
+    score=0
+    
+    for a in range(tmp):
+        for b in range(tmp):
+            if board[a][b] in nums:
+                board[a][b]=0
+    
+    for a in range(tmp):
+        if sum(board[a]) == 0:
+            score += 1
+            
+        for b in range(tmp):
+            order += board[b][a]
+            
+        if order == 0:
+            score += 1
+        
+        order = 0
+        
+        under += board[a][a]
+        wuder += board[a][tmp-a-1]
+        
+    if under == 0:
+        score += 1
+    if wuder == 0:
+        score += 1
+        
+    return score
